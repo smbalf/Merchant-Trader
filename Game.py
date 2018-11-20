@@ -2,7 +2,7 @@ import sys
 import pickle
 import os
 import time
-os.system("clr")
+os.system("cls")
 
 """
 Guess we need to create some player files...
