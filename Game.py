@@ -1,3 +1,7 @@
+#Started 19th November 2018 by Sam Balf
+#Python "Trading Tycoon" game inspired by Ocean Trader developed by Software 2000
+#version_1 completed: 
+
 import sys
 import pickle
 import os
@@ -69,7 +73,6 @@ def place_trade():
   elif trade.lower() == "y":
     print("")
     return game_menu()
-
   
 #Commodity inventory list
 inv_list = [commodities[0], 
@@ -102,7 +105,6 @@ def game_intro():
   print("")
   print("Welcome to Merchant Trader, " + name + ".")
   return game_menu()
-
 
 #The game main menu
 def game_menu():
