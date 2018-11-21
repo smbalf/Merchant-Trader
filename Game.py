@@ -31,11 +31,12 @@ iron_offer = offer_price(iron_bid)
 tin_offer = offer_price(tin_bid)
 coal_offer = offer_price(coal_bid)
 
+#sets the names of the commodities in-game
 commodities = ("Iron Ore", "Tin Ore", "Coal Ore")
 
 #Price list text input
 iron = commodities[0] + "   " + str(iron_bid) + "    " + str(iron_offer)
-tin = commodities[1] + "   " + str(tin_bid) + "  " + str(tin_offer)
+tin = commodities[1] + "    " + str(tin_bid) + "  " + str(tin_offer)
 coal = commodities[2] + "   " + str(coal_bid) + "   " + str(coal_offer)
 
 #Commodity price list 
@@ -70,12 +71,12 @@ def place_trade():
     return game_menu()
 
   
-  #Commodity inventory list
+#Commodity inventory list
 inv_list = [commodities[0], 
             commodities[1], 
             commodities[2]]
 
-  #Commmodity inventory display
+#Commmodity inventory display
 def inventory():
   print(str(company) + "'s Inventory")
   time.sleep(2)
@@ -89,20 +90,21 @@ def inventory():
   time.sleep(1)
   return game_menu()
 
-#The game start code
+#The game initialisation code
 def game_start():
   print("")
   input("Press Enter to start...")
   print("")
   time.sleep(1)
 
+#Game welcome
 def game_intro():
   print("")
   print("Welcome to Merchant Trader, " + name + ".")
   return game_menu()
 
 
-#The game's menu
+#The game main menu
 def game_menu():
   print("")
   time.sleep(1)
@@ -124,14 +126,19 @@ game_start()
 name = input("Please type in your name: ")
 time.sleep(1)
 print("")
+
 #obtain a name for player's company
 company = input("What is the name of your company?: ")
 time.sleep(1)
 
 game_menu()
 
-#Player chooses between Bid and Offer (B/O)
-#  - Player inputs number they wish to B/O
-#  - Can't O w/o inventory or can't B w/o cash
-#  - print("You have sold " + str(comm_sold) + ".")
-#    or print("you have bought " + str(comm_bought) + ".")
+"""
+- Add player trading screen
+- Player chooses between Bid and Offer [B/O]
+- Player inputs quantity they wish to [B/O]
+- Can't [O] w/o inventory or can't [B] w/o cash
+- print("You have sold " + str(comm_sold) + ".")
+  or print("you have bought " + str(comm_bought) + ".")
+- save values to player's inventory // player saving in general
+"""
