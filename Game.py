@@ -17,7 +17,7 @@ Info to include:
 def bid_price(price_change, base=100):
   return round(price_change * base, 3)
 
-#Commodity pid prices
+#Commodity bid prices
 iron_bid = bid_price(1)
 tin_bid = bid_price(1.15)
 coal_bid = bid_price(0.9)
