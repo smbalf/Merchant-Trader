@@ -13,7 +13,6 @@ Info to include:
   -Inventory held
 """
 
-
 #Defines the bid price calculation
 def bid_price(price_change, base=100):
   return round(price_change * base, 3)
@@ -32,18 +31,22 @@ iron_offer = offer_price(iron_bid)
 tin_offer = offer_price(tin_bid)
 coal_offer = offer_price(coal_bid)
 
+commodities = ("Iron Ore", "Tin Ore", "Coal Ore")
+
 #Price list text input
-iron = "Iron Ore: " + "   " + str(iron_bid) + "    " + str(iron_offer)
-tin = "Tin Ore : " + "   " + str(tin_bid) + "  " + str(tin_offer)
-coal = "Coal Ore: " + "   " + str(coal_bid) + "   " + str(coal_offer)
+iron = commodities[0] + "   " + str(iron_bid) + "    " + str(iron_offer)
+tin = commodities[1] + "   " + str(tin_bid) + "  " + str(tin_offer)
+coal = commodities[2] + "   " + str(coal_bid) + "   " + str(coal_offer)
 
 #Commodity price list 
 price_list = [iron, 
               tin, 
               coal]
 
-#The commodity display
+#Commodity price display
 def comm_display():
+  print("Here is a list of current prices: ")
+  time.sleep(2)
   print("")
   print("---------------------------------")
   print("             Bid    Offer")
@@ -51,45 +54,84 @@ def comm_display():
     print(row)
   print("---------------------------------")
   print("")
-
-#Game Start
-
-print("Welcome to Merchant Trader.")
-time.sleep(1)
-print("")
-input("Press any key to start the game...")
-print("")
-
-"""
-Need the game start menu here
-  - Display player's cash and inventory
-  - Press P to see current prices
-"""
-
-while True:
-  print("Here is a list of current prices:")
   time.sleep(2)
-  #Shows the commodity price display
-  comm_display()
-  time.sleep(2)
-  #Player input
+  return place_trade()
+
+def place_trade():
   trade = input("Would you like to place a trade? (Y / N)")
   if trade.lower() == "n":
     print("")
     print("You return to the main menu.")
+    time.sleep(2)
     print("")
-    continue
+    return game_menu()
   elif trade.lower() == "y":
-      print("")
-      break 
-#Player decides which commodity to trade
-print("Which commodity would you like to trade?")
-print("")
+    print("")
+    return game_menu()
 
-"""
-Player chooses between Bid and Offer (B/O)
-  - Player inputs number they wish to B/O
-  - Can't O w/o inventory or can't B w/o cash
-print("You have sold " + str(comm_sold) + ".")
-or
-print("you have bought " + str(comm_bought) + ".")"""
+  
+  #Commodity inventory list
+inv_list = [commodities[0], 
+            commodities[1], 
+            commodities[2]]
+
+  #Commmodity inventory display
+def inventory():
+  print(str(company) + "'s Inventory")
+  time.sleep(2)
+  print("---------------------------------")
+  print("Commodity             Quantity")
+  print("")
+  for row in inv_list:
+    print(row)
+  print("---------------------------------")
+  print("")
+  time.sleep(1)
+  return game_menu()
+
+#The game start code
+def game_start():
+  print("")
+  input("Press Enter to start...")
+  print("")
+  time.sleep(1)
+
+def game_intro():
+  print("")
+  print("Welcome to Merchant Trader, " + name + ".")
+  return game_menu()
+
+
+#The game's menu
+def game_menu():
+  print("")
+  time.sleep(1)
+  print("1. View the current commodities prices")
+  print("2. View my current inventory")
+  print("")
+  menu = input("What would you like to do? ")
+  print("")
+  if menu == "1":
+    return comm_display()
+  elif menu == "2":
+    return inventory()
+
+
+#************GAME RUN CODE BEGINS HERE************
+game_start()
+
+#Obtain a name for the player
+name = input("Please type in your name: ")
+time.sleep(1)
+print("")
+#obtain a name for player's company
+company = input("What is the name of your company?: ")
+time.sleep(1)
+
+game_menu()
+
+#Player chooses between Bid and Offer (B/O)
+#  - Player inputs number they wish to B/O
+#  - Can't O w/o inventory or can't B w/o cash
+#  - print("You have sold " + str(comm_sold) + ".")
+#    or print("you have bought " + str(comm_bought) + ".")
