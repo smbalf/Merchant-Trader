@@ -6,42 +6,71 @@ import sys
 import pickle
 import os
 import time
+from asciimatics.effects import Cycle, Stars
+from asciimatics.renderers import FigletText
+from asciimatics.scene import Scene
+from asciimatics.screen import Screen
 os.system("cls")
 
-"""
-Guess we need to create some player files...
-Info to include:
-  -Player name
-  -Company name
-  -Current cash value
-  -Inventory held
-"""
+class Player:
+  def __init__(self, name, company, balance=100000, inventory=0):
+    self.name = name
+    self.company = company 
+    self.balance = balance
+    self.inventory = inventory  
 
-#Defines the bid price calculation
+  def player_info(self):
+    print(self.company + "'s Corporate Sheet")
+    print("--------------------------------")
+    print("Current balance: $" + str(self.balance))
+    print("Current inventory: " + str(self.inventory))
+    print("--------------------------------")
+    #p.player_info() <- OUTPUT
+
+"""
+def merchant_trader(screen):
+  effects = [
+    Cycle(
+      screen,
+      FigletText("M E R C H A N T", font='big'),
+      int(screen.height / 2 - 8)),
+    Cycle(
+      screen,
+      FigletText("T R A D E R", font='big'),
+      int(screen.height / 2 + 3)),
+    Stars(screen, 200) 
+  ]
+  screen.play([Scene(effects, 500)])
+  screen.clear()
+  print("Loading...")
+  time.sleep(2)
+  return game_start()
+"""
+#sets the names of the commodities in-game
+commodities = ("Iron Ore", "Tin Ore", "Coal Ore")
+
+#Defines the bid price calculation (rounding = 3)
 def bid_price(price_change, base=100):
   return round(price_change * base, 3)
+
+#Defines the offer price calculation (rounding = 3)
+def offer_price(bid_price):
+  return round(bid_price + (bid_price * 0.01), 3)
 
 #Commodity bid prices
 iron_bid = bid_price(1)
 tin_bid = bid_price(1.15)
 coal_bid = bid_price(0.9)
 
-#Defines the offer price calculation
-def offer_price(bid):
-  return round(bid + (bid * 0.01), 3)
-
 #Commodity offer prices
 iron_offer = offer_price(iron_bid)
 tin_offer = offer_price(tin_bid)
 coal_offer = offer_price(coal_bid)
 
-#sets the names of the commodities in-game
-commodities = ("Iron Ore", "Tin Ore", "Coal Ore")
-
 #Price list text input
-iron = commodities[0] + "   " + str(iron_bid) + "    " + str(iron_offer)
-tin = commodities[1] + "    " + str(tin_bid) + "  " + str(tin_offer)
-coal = commodities[2] + "   " + str(coal_bid) + "   " + str(coal_offer)
+iron = commodities[0] + "     " + str(iron_bid) + "      " + str(iron_offer)
+tin = commodities[1] + "      " + str(tin_bid) + "    " + str(tin_offer)
+coal = commodities[2] + "     " + str(coal_bid) + "     " + str(coal_offer)
 
 #Commodity price list 
 price_list = [iron, 
@@ -54,7 +83,7 @@ def comm_display():
   time.sleep(2)
   print("")
   print("---------------------------------")
-  print("             Bid    Offer")
+  print("             Bid      Offer")
   for row in price_list:
     print(row)
   print("---------------------------------")
@@ -98,7 +127,6 @@ def game_start():
   print("")
   input("Press Enter to start...")
   print("")
-  time.sleep(1)
 
 #Game welcome
 def game_intro():
@@ -111,7 +139,7 @@ def game_menu():
   print("")
   time.sleep(1)
   print("1. View the current commodities prices")
-  print("2. View my current inventory")
+  print("2. View my company balance and inventory")
   print("")
   menu = input("What would you like to do? ")
   print("")
@@ -121,26 +149,14 @@ def game_menu():
     return inventory()
 
 
-#************GAME RUN CODE BEGINS HERE************
+#************GAME RUNS BEGINS HERE************
+#Screen.wrapper(merchant_trader)
 game_start()
 
-#Obtain a name for the player
-name = input("Please type in your name: ")
-time.sleep(1)
+name = input("What is your name?  ")
 print("")
+company = input("What is your company name?"  )
+print("")
+p = Player(name, company)
 
-#obtain a name for player's company
-company = input("What is the name of your company?: ")
-time.sleep(1)
-
-game_menu()
-
-"""
-- Add player trading screen
-- Player chooses between Bid and Offer [B/O]
-- Player inputs quantity they wish to [B/O]
-- Can't [O] w/o inventory or can't [B] w/o cash
-- print("You have sold " + str(comm_sold) + ".")
-  or print("you have bought " + str(comm_bought) + ".")
-- save values to player's inventory // player saving in general
-"""
+game_intro()
