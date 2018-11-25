@@ -6,10 +6,6 @@ import sys
 import pickle
 import os
 import time
-from asciimatics.effects import Cycle, Stars
-from asciimatics.renderers import FigletText
-from asciimatics.scene import Scene
-from asciimatics.screen import Screen
 os.system("cls")
 
 class Player:
@@ -27,25 +23,7 @@ class Player:
     print("--------------------------------")
     #p.player_info() <- OUTPUT
 
-"""
-def merchant_trader(screen):
-  effects = [
-    Cycle(
-      screen,
-      FigletText("M E R C H A N T", font='big'),
-      int(screen.height / 2 - 8)),
-    Cycle(
-      screen,
-      FigletText("T R A D E R", font='big'),
-      int(screen.height / 2 + 3)),
-    Stars(screen, 200) 
-  ]
-  screen.play([Scene(effects, 500)])
-  screen.clear()
-  print("Loading...")
-  time.sleep(2)
-  return game_start()
-"""
+
 #sets the names of the commodities in-game
 commodities = ("Iron Ore", "Tin Ore", "Coal Ore")
 
@@ -79,25 +57,21 @@ price_list = [iron,
 
 #Commodity price display
 def comm_display():
-  print("Here is a list of current prices: ")
+  print("Here is a list of current prices: \n")
   time.sleep(2)
-  print("")
   print("---------------------------------")
   print("             Bid      Offer")
   for row in price_list:
     print(row)
-  print("---------------------------------")
-  print("")
+  print("---------------------------------\n")
   time.sleep(2)
   return place_trade()
 
 def place_trade():
   trade = input("Would you like to place a trade? (Y / N)")
   if trade.lower() == "n":
-    print("")
-    print("You return to the main menu.")
+    print("\nYou return to the main menu.\n")
     time.sleep(2)
-    print("")
     return game_menu()
   elif trade.lower() == "y":
     print("")
@@ -113,36 +87,28 @@ def inventory():
   print(str(company) + "'s Inventory")
   time.sleep(2)
   print("---------------------------------")
-  print("Commodity             Quantity")
-  print("")
+  print("Commodity             Quantity\n")
   for row in inv_list:
     print(row)
-  print("---------------------------------")
-  print("")
+  print("---------------------------------\n")
   time.sleep(1)
   return game_menu()
 
 #The game initialisation code
 def game_start():
-  print("")
-  input("Press Enter to start...")
-  print("")
+  input("\nPress Enter to start...\n")
 
 #Game welcome
 def game_intro():
-  print("")
-  print("Welcome to Merchant Trader, " + name + ".")
+  print("\nWelcome to Merchant Trader, " + name + ".")
   return game_menu()
 
 #The game main menu
 def game_menu():
-  print("")
   time.sleep(1)
-  print("1. View the current commodities prices")
-  print("2. View my company balance and inventory")
-  print("")
-  menu = input("What would you like to do? ")
-  print("")
+  print("\n1. View the current commodities prices")
+  print("2. View my company balance and inventory\n")
+  menu = input("What would you like to do?\n ")
   if menu == "1":
     return comm_display()
   elif menu == "2":
@@ -153,10 +119,8 @@ def game_menu():
 #Screen.wrapper(merchant_trader)
 game_start()
 
-name = input("What is your name?  ")
-print("")
-company = input("What is your company name?"  )
-print("")
+name = input("What is your name?  \n")
+company = input("What is your company name?\n"  )
 p = Player(name, company)
 
 game_intro()
